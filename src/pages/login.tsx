@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import "./Login.css";
 
 const SignInPage: React.FC = () => {
   return (
@@ -20,15 +21,18 @@ const SignInPage: React.FC = () => {
             </p>
             <Form>
               <Form.Group controlId="usernameOrEmail" className="mb-3">
-                <Form.Label>Username or email</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Enter username or email"
+                  placeholder="Username or email"
+                  className="square-input"
                 />
               </Form.Group>
               <Form.Group controlId="password" className="mb-3">
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Enter password" />
+                <Form.Control
+                  type="password"
+                  placeholder="Enter password"
+                  className="square-input"
+                />
               </Form.Group>
               <Form.Group controlId="keepMeSignedIn" className="mb-3">
                 <Form.Check type="checkbox" label="Keep me signed in" />
@@ -37,27 +41,20 @@ const SignInPage: React.FC = () => {
                 Sign In
               </Button>
             </Form>
+
             <div className="text-center">Or Sign In With</div>
             <div className="d-flex justify-content-center mt-3">
-              <a href="/signin/google" className="mx-2">
-                <img src="path/to/google-icon.svg" alt="Google" width="32" />
+              <a href="/signin/google" className="social-icon mx-2">
+                <i className="fab fa-google" />
               </a>
-              <a href="/signin/facebook" className="mx-2">
-                <img
-                  src="path/to/facebook-icon.svg"
-                  alt="Facebook"
-                  width="32"
-                />
+              <a href="/signin/facebook" className="social-icon mx-2">
+                <i className="fab fa-facebook" />
               </a>
-              <a href="/signin/linkedin" className="mx-2">
-                <img
-                  src="path/to/linkedin-icon.svg"
-                  alt="LinkedIn"
-                  width="32"
-                />
+              <a href="/signin/linkedin" className="social-icon mx-2">
+                <i className="fab fa-linkedin-in" />
               </a>
-              <a href="/signin/twitter" className="mx-2">
-                <img src="path/to/twitter-icon.svg" alt="Twitter" width="32" />
+              <a href="/signin/twitter" className="social-icon mx-2">
+                <i className="fab fa-twitter" />
               </a>
             </div>
           </div>
