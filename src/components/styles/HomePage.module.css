@@ -1,0 +1,110 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .navLinks {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+  }
+  
+  .slider {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+    position: relative;
+  }
+  
+  .navButton {
+    background: none;
+    border: none;
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  
+  .navButton:first-child {
+    left: 10px;
+  }
+  
+  .navButton:last-child {
+    right: 10px;
+  }
+  
+  .imageContainer {
+    width: 100%;
+    max-width: 600px;
+    height: 300px;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .image {
+    font-size: 24px;
+    color: #555;
+  }
+  
+  .dots {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ddd;
+    cursor: pointer;
+  }
+  
+  .activeDot {
+    background: #555;
+  }
+  
+  .countryCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 10px;
+  }
+  
+  .imagePlaceholder {
+    width: 100px;
+    height: 60px;
+    background: #eee;
+    margin-bottom: 10px;
+  }
+  
+  .loadMoreButton {
+    background: #000;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    margin-top: 10px;
+  }
+  
+  .footer {
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid #ddd;
+  }
+  
+  .socialLinks {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 10px;
+  }
+  
