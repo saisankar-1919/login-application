@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import Home from "./pages/Home";
-import Login from "./pages/Login";
+import Login from "./pages/Signin";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUserFromLocalStorage } from "./redux/authSlice";
