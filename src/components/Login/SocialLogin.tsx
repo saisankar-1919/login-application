@@ -9,7 +9,8 @@ const SocialLogin: React.FC = () => {
       <Row className="justify-content-center mt-3">
         <Col xs="auto">
           <Button
-            href="/signin/google"
+            href="https://google.com"
+            target="blank"
             variant="outline-dark"
             className={`${styles.socialButton} rounded-pill`}
           >
@@ -18,7 +19,8 @@ const SocialLogin: React.FC = () => {
         </Col>
         <Col xs="auto">
           <Button
-            href="/signin/facebook"
+            href="https://facebook.com"
+            target="blank"
             variant="outline-dark"
             className={`${styles.socialButton} rounded-pill`}
           >
@@ -27,7 +29,8 @@ const SocialLogin: React.FC = () => {
         </Col>
         <Col xs="auto">
           <Button
-            href="/signin/linkedin"
+            href="https://linkedin.com"
+            target="blank"
             variant="outline-dark"
             className={`${styles.socialButton} rounded-pill`}
           >
@@ -36,7 +39,8 @@ const SocialLogin: React.FC = () => {
         </Col>
         <Col xs="auto">
           <Button
-            href="/signin/twitter"
+            href="https://twitter.com"
+            target="blank"
             variant="outline-dark"
             className={`${styles.socialButton} rounded-pill`}
           >
