@@ -6,7 +6,7 @@ const LoginHeader: React.FC = () => {
     <>
       <h2 className={`mb-4 ${styles.heading}`}>Sign In</h2>
       <p>
-        New user? <a href="/create-account">Create an account</a>
+        New user? <a href="/login">Create an account</a>
       </p>
     </>
   );

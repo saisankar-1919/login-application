@@ -4,7 +4,7 @@ import { Col, Row, Card } from "react-bootstrap";
 function CountryLoading({ numRows }: { numRows: number }) {
   const numColumns = 2;
   return (
-    <Row className="g-4">
+    <Row className="g-4 mb-4">
       {Array.from({ length: numRows }).map((_, rowIndex) => (
         <Row key={rowIndex} className="g-4 w-100">
           {Array.from({ length: numColumns }).map((_, colIndex) => (

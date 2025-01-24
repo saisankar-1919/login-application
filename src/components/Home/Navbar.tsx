@@ -1,25 +1,24 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
+import { logout } from "../../redux/authSlice";
+import { useDispatch } from "react-redux";
+import { Button, Container, Nav, Navbar } from "react-bootstrap";
 
 function CollapsibleNavbar() {
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
 
-  // Extract the current region from query params (case insensitive comparison)
   const queryParams = new URLSearchParams(location.search);
   const currentRegion = queryParams.get("region")?.toLowerCase() || "all";
 
   const [selected, setSelected] = useState<string>(currentRegion);
 
-  // Sync the `selected` state with query params whenever `location.search` changes
   useEffect(() => {
     setSelected(currentRegion);
   }, [currentRegion]);
 
-  const handleSelect = (key: string | null) => {
+  const handleRegionSelect = (key: string | null) => {
     if (key) {
       const params = new URLSearchParams(location.search);
       if (key === "all") {
@@ -29,6 +28,11 @@ function CollapsibleNavbar() {
       }
       navigate(`?${params.toString()}`);
     }
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/login");
   };
 
   const activeStyle: React.CSSProperties = {
@@ -45,12 +49,27 @@ function CollapsibleNavbar() {
   return (
     <Navbar collapseOnSelect expand="lg">
       <Container>
-        <Navbar.Brand href="#home" style={{ fontWeight: "bold" }}>
+        <Navbar.Brand href="/home" style={{ fontWeight: "bold" }}>
           Countries
         </Navbar.Brand>
+        <Button
+          variant="outline-danger"
+          onClick={handleLogout}
+          style={{
+            display: "none",
+            marginLeft: "20px",
+          }}
+          className="d-none d-lg-inline-block ml-auto"
+        >
+          <i className="fa fa-sign-out"></i>
+        </Button>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="ms-auto" onSelect={handleSelect} activeKey={selected}>
+          <Nav
+            className="ms-auto"
+            onSelect={handleRegionSelect}
+            activeKey={selected}
+          >
             <Nav.Link
               eventKey="all"
               style={selected === "all" ? activeStyle : defaultStyle}

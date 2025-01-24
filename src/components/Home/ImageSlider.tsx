@@ -4,21 +4,16 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { BANNER_IMAGES } from "../../constants";
 
 const ImageSliderSection = () => {
   const [index, setIndex] = useState(0);
 
   const handleSelect = (selectedIndex: number) => setIndex(selectedIndex);
 
-  const images = [
-    "https://www.w3schools.com/howto/img_nature_wide.jpg",
-    "https://www.w3schools.com/howto/img_snow_wide.jpg",
-    "https://www.w3schools.com/howto/img_lights_wide.jpg",
-  ];
-
   const handleNavigation = (direction: number) => {
     setIndex((prevIndex) =>
-      Math.min(Math.max(prevIndex + direction, 0), images.length - 1)
+      Math.min(Math.max(prevIndex + direction, 0), BANNER_IMAGES.length - 1)
     );
   };
 
@@ -34,7 +29,7 @@ const ImageSliderSection = () => {
             controls={false}
             style={{ height: "350px" }}
           >
-            {images.map((src, idx) => (
+            {BANNER_IMAGES.map((src, idx) => (
               <Carousel.Item key={idx}>
                 <img src={src} alt={`Slide ${idx}`} />
               </Carousel.Item>
@@ -50,7 +45,7 @@ const ImageSliderSection = () => {
             </button>
 
             <div className="d-flex gap-2">
-              {images.map((_, dotIndex) => (
+              {BANNER_IMAGES.map((_, dotIndex) => (
                 <div
                   key={dotIndex}
                   className={`rounded-circle ${
