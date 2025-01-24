@@ -7,9 +7,16 @@ import styles from "../components/styles/HomePage.module.css";
 import CollapsibleNavbar from "../components/Home/Navbar";
 import WelcomeSection from "../components/Home/Welcome";
 import ImageSliderSection from "../components/Home/ImageSlider";
+import { useLocation } from "react-router";
 
 const Home: React.FC = () => {
-  const { countries, loading, error, loadMoreCountries } = useCountries();
+  const location = useLocation();
+
+  // Parse query params
+  const queryParams = new URLSearchParams(location.search);
+  const region = queryParams.get("region") || undefined;
+  const { countries, loading, error, loadMoreCountries } = useCountries(region);
+  console.log("countries: ", countries);
 
   return (
     <Container className={styles.homeContainer}>

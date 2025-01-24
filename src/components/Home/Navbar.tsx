@@ -1,14 +1,34 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
 
 function CollapsibleNavbar() {
-  const [selected, setSelected] = useState<string>("all");
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Extract the current region from query params (case insensitive comparison)
+  const queryParams = new URLSearchParams(location.search);
+  const currentRegion = queryParams.get("region")?.toLowerCase() || "all";
+
+  const [selected, setSelected] = useState<string>(currentRegion);
+
+  // Sync the `selected` state with query params whenever `location.search` changes
+  useEffect(() => {
+    setSelected(currentRegion);
+  }, [currentRegion]);
 
   const handleSelect = (key: string | null) => {
-    if (key) setSelected(key);
+    if (key) {
+      const params = new URLSearchParams(location.search);
+      if (key === "all") {
+        params.delete("region");
+      } else {
+        params.set("region", key);
+      }
+      navigate(`?${params.toString()}`);
+    }
   };
 
   const activeStyle: React.CSSProperties = {
@@ -30,28 +50,21 @@ function CollapsibleNavbar() {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav
-            className="ms-auto"
-            onSelect={handleSelect}
-            activeKey={selected} // Set the activeKey to the selected state
-          >
+          <Nav className="ms-auto" onSelect={handleSelect} activeKey={selected}>
             <Nav.Link
               eventKey="all"
-              href="#all"
               style={selected === "all" ? activeStyle : defaultStyle}
             >
               All
             </Nav.Link>
             <Nav.Link
               eventKey="asia"
-              href="#asia"
               style={selected === "asia" ? activeStyle : defaultStyle}
             >
               Asia
             </Nav.Link>
             <Nav.Link
               eventKey="europe"
-              href="#europe"
               style={selected === "europe" ? activeStyle : defaultStyle}
             >
               Europe

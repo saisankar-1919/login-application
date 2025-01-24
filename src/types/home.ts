@@ -4,3 +4,7 @@ export interface Country {
   name: string;
   region: string;
 }
+
+export interface CountryFilter {
+  region: string | undefined;
+}

@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
 import { getAllCountries } from "../api/countries";
-import { Country } from "../types/home";
+import { Country, CountryFilter } from "../types/home";
 
 const COUNTRIES_URL =
   "https://restcountries.com/v2/all?fields=name,region,flag";
 const PAGE_SIZE = 12;
 
-export const useCountries = () => {
+export const useCountries = (filterRegion: string | undefined) => {
+  console.log("filterRegion", filterRegion);
   const [countries, setCountries] = useState<Country[]>([]);
-  const [page, setPage] = useState(1); // Track the current page
+  const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -18,11 +19,21 @@ export const useCountries = () => {
       setError(null);
 
       const allCountries = await getAllCountries();
+      console.log("All countries:", allCountries);
+
+      const filteredCountries = filterRegion
+        ? allCountries.filter(
+            (country: Country) =>
+              country.region &&
+              country.region.toLowerCase() === filterRegion.toLowerCase()
+          )
+        : allCountries;
+      console.log("filtered countries", filteredCountries);
 
       const startIndex = (page - 1) * PAGE_SIZE;
       const endIndex = page * PAGE_SIZE;
 
-      const paginatedCountries = allCountries.slice(startIndex, endIndex);
+      const paginatedCountries = filteredCountries.slice(startIndex, endIndex);
 
       setCountries((prevCountries) => [
         ...prevCountries,
@@ -36,15 +47,16 @@ export const useCountries = () => {
     }
   };
 
-  // Initial call to fetch countries
   useEffect(() => {
-    fetchCountries(page);
-  }, []); // Only run once when the component mounts
+    setCountries([]);
+    setPage(1);
+    fetchCountries(1);
+  }, [filterRegion]);
 
   return {
     countries,
     loading,
     error,
-    loadMoreCountries: () => fetchCountries(page), // Trigger for loading more countries
+    loadMoreCountries: () => fetchCountries(page),
   };
 };
