@@ -9,6 +9,7 @@ import ImageSliderSection from "../components/Home/ImageSlider";
 import { useLocation, useNavigate } from "react-router";
 import { RootState } from "../redux/store";
 import { useSelector } from "react-redux";
+import Footer from "../components/Home/Footer";
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -61,6 +62,7 @@ const Home: React.FC = () => {
           </Button>
         </div>
       )}
+      <Footer />
     </Container>
   );
 };

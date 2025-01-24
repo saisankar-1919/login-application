@@ -1,26 +1,56 @@
 import React from "react";
 import styles from "../styles/HomePage.module.css";
+import { Button, Row, Col, Container } from "react-bootstrap";
 
 const Footer: React.FC = () => {
   return (
-    <footer className={styles.footer}>
-      <div className={styles.socialLinks}>
-        <a href="/">
-          <i className="fab fa-facebook-f"></i>
-        </a>
-        <a href="/">
-          <i className="fab fa-twitter"></i>
-        </a>
-        <a href="/">
-          <i className="fab fa-linkedin-in"></i>
-        </a>
-        <a href="/">
-          <i className="fab fa-youtube"></i>
-        </a>
-      </div>
-      <p>example@email.com</p>
-      <p>Copyright © 2025 Name. All rights reserved.</p>
-    </footer>
+    <Container style={{ marginTop: "70px", marginBottom: "50px" }}>
+      <Row className="justify-content-center mt-3">
+        <Col xs="auto">
+          <Button
+            href="/signin/facebook"
+            variant="outline-dark"
+            className={`${styles.socialButton} rounded-pill`}
+          >
+            <i className="fab fa-facebook" style={{ color: "black" }} />
+          </Button>
+        </Col>
+        <Col xs="auto">
+          <Button
+            href="/signin/twitter"
+            variant="outline-dark"
+            className={`${styles.socialButton} rounded-pill`}
+          >
+            <i className="fab fa-twitter" style={{ color: "black" }} />
+          </Button>
+        </Col>
+        <Col xs="auto">
+          <Button
+            href="/signin/linkedin"
+            variant="outline-dark"
+            className={`${styles.socialButton} rounded-pill`}
+          >
+            <i className="fab fa-linkedin-in" style={{ color: "black" }} />
+          </Button>
+        </Col>
+
+        <Col xs="auto">
+          <Button
+            href="/signin/google"
+            variant="outline-dark"
+            className={`${styles.socialButton} rounded-pill`}
+          >
+            <i className="fab fa-youtube" style={{ color: "black" }} />
+          </Button>
+        </Col>
+      </Row>
+      <Row style={{ marginTop: "20px" }}>
+        <p className="text-center">Example@email.com</p>
+        <p className="text-center">
+          Copyright © 2020 Name. All rights reserved.
+        </p>
+      </Row>
+    </Container>
   );
 };
 

@@ -4,8 +4,20 @@ import LoginHeader from "../components/Login/LoginHeader";
 import LoginForm from "../components/Login/LoginForm";
 import SocialLogin from "../components/Login/SocialLogin";
 import Illustration from "../components/Login/Illustration";
+import { useNavigate } from "react-router";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 
 const SignInPage: React.FC = () => {
+  const navigate = useNavigate();
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated
+  );
+
+  if (isAuthenticated) {
+    navigate("/home");
+  }
+
   return (
     <Container
       fluid
