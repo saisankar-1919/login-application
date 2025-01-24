@@ -1,33 +1,49 @@
 import React from "react";
-import Header from "../components/Home/Header";
-import Slider from "../components/Home/Slider";
+import { Row, Button, Container } from "react-bootstrap"; // Import Bootstrap components
+import { useCountries } from "../hooks/useCountries"; // Custom hook to get countries
 import CountryCard from "../components/Home/CountryCard";
-import Footer from "../components/Home/Footer";
+import CountryLoading from "../components/common/CountryLoading";
 import styles from "../components/styles/HomePage.module.css";
-
-const countries = [
-  { country: "Afghanistan", region: "Asia" },
-  { country: "Albania", region: "Europe" },
-  { country: "Afghanistan", region: "Asia" },
-  // Add more countries as needed
-];
+import CollapsibleNavbar from "../components/Home/Navbar";
+import WelcomeSection from "../components/Home/Welcome";
+import ImageSliderSection from "../components/Home/ImageSlider";
 
 const Home: React.FC = () => {
+  const { countries, loading, error, loadMoreCountries } = useCountries();
+
   return (
-    <div>
-      <Header />
-      <main className={styles.main}>
-        <h2 className={styles.welcomeTitle}>WELCOME</h2>
-        <Slider />
-        <section className={styles.countriesSection}>
-          {countries.map((c, index) => (
-            <CountryCard key={index} country={c.country} region={c.region} />
-          ))}
-          <button className={styles.loadMoreButton}>Load More</button>
-        </section>
-      </main>
-      <Footer />
-    </div>
+    <Container className={styles.homeContainer}>
+      <CollapsibleNavbar />
+      <WelcomeSection />
+      <ImageSliderSection />
+      <Row className="g-4 pt-4 pb-4">
+        {countries.map((c, index) => (
+          <CountryCard
+            key={c.name}
+            country={c.name}
+            region={c.region}
+            flag={c.flag}
+          />
+        ))}
+      </Row>
+      {loading && <CountryLoading numRows={4} />}
+
+      <div className="d-flex justify-content-center">
+        <Button
+          variant="primary"
+          className="loadMoreButton pt-3 pb-3 pl-6 pr-6"
+          onClick={loadMoreCountries}
+          style={{
+            backgroundColor: "black",
+            border: "none",
+            borderRadius: "0",
+            color: "white",
+          }}
+        >
+          Load More
+        </Button>
+      </div>
+    </Container>
   );
 };
 
