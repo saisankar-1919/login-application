@@ -1,14 +1,12 @@
-.homeContainer{
-  max-width: 75%;
+.homeContainer {
   margin-bottom: 20px;
 }
 
-.header {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 20px;
-    border-bottom: 1px solid #ddd;
+@media (min-width: 992px) {
+  .homeContainer {
+    max-width: 75%;
   }
+}
   
   .navLinks {
     list-style: none;

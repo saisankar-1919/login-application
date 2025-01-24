@@ -8,7 +8,8 @@ import { login } from "../../redux/authSlice";
 const LoginForm: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [localError, setLocalError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -20,19 +21,29 @@ const LoginForm: React.FC = () => {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!validatePassword(password)) {
-      setLocalError(
-        "Password must be at least 8 characters long and include a capital letter, a number, and a symbol."
-      );
-      return;
+    setEmailError("");
+    setPasswordError("");
+
+    if (!email.trim()) {
+      setEmailError("Username or email is required.");
     }
 
-    setLocalError("");
+    if (!validatePassword(password)) {
+      setPasswordError(
+        "Password must be at least 8 characters long and include a capital letter, a number, and a symbol."
+      );
+    }
 
-    const user = { email, password };
-    dispatch(login(user));
-
-    navigate("/home");
+    if (
+      !emailError &&
+      !passwordError &&
+      email.trim() &&
+      validatePassword(password)
+    ) {
+      const user = { email, password };
+      dispatch(login(user));
+      navigate("/home");
+    }
   };
 
   return (
@@ -43,20 +54,31 @@ const LoginForm: React.FC = () => {
           id="email"
           value={email}
           placeholder="Username or email"
-          className={styles.squareInput}
+          className={`${styles.squareInput} ${emailError ? "is-invalid" : ""}`}
           onChange={(e) => setEmail(e.target.value)}
         />
+        {emailError && (
+          <div className="text-danger" style={{ marginTop: "5px" }}>
+            {emailError}
+          </div>
+        )}
       </Form.Group>
       <Form.Group controlId="password" className="mb-3">
         <Form.Control
           type="password"
           placeholder="Enter password"
-          className={styles.squareInput}
+          className={`${styles.squareInput} ${
+            passwordError ? "is-invalid" : ""
+          }`}
           id="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        {localError && <div style={{ color: "red" }}>{localError}</div>}
+        {passwordError && (
+          <div className="text-danger" style={{ marginTop: "5px" }}>
+            {passwordError}
+          </div>
+        )}
       </Form.Group>
       <Form.Group controlId="keepMeSignedIn" className="mb-3">
         <Form.Check type="checkbox" label="Keep me signed in" />
