@@ -8,7 +8,7 @@ import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 
-const SignInPage: React.FC = () => {
+const Login: React.FC = () => {
   const navigate = useNavigate();
   const isAuthenticated = useSelector(
     (state: RootState) => state.auth.isAuthenticated
@@ -47,4 +47,4 @@ const SignInPage: React.FC = () => {
   );
 };
 
-export default SignInPage;
+export default Login;
